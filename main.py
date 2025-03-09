@@ -2,8 +2,8 @@ from colorama import Fore, Style
 import datetime
 import statistics
 
-expenses = []
-grouped_expenses = {}
+expenses = [] # [[name, price, category], [name, price, category], ...]
+grouped_expenses = {} # {category = [(name, price), (name, price), ...], category = [(name, price), ...], ...}
 
 print("Write an expense in the format" + Fore.CYAN + " name:price:category" + Fore.RESET, end='. ')
 print("If you want to stop writing expenses, type '" + Fore.CYAN + "stop" + Fore.RESET + "'.")
@@ -16,8 +16,8 @@ while True:
     if user_input == "stop":
         if not expenses: print(Fore.RED + "You have not written any expense yet" + Fore.RESET) # If expenses list is empty
         else: break
-    elif len(splited_input) == 3 and all(splited_input):
-        if splited_input[1].isnumeric() and float(splited_input[1]) > 0:
+    elif len(splited_input) == 3 and all(splited_input): # Check if input is valid
+        if splited_input[1].isnumeric() and float(splited_input[1]) > 0: # Check if price is a valid number
             print(Fore.GREEN + f"Expense submitted ({splited_input[0]})" + Fore.RESET)
             expenses.append(splited_input)
         else:
@@ -34,7 +34,7 @@ for expense in expenses:
     else:
         grouped_expenses[category].append((name, price))  # Add new expense to existing category
 
-
+# Overall expenses
 print(Style.BRIGHT + Fore.MAGENTA + f"\nOVERALL EXPENSES" + Style.RESET_ALL, end="")
 print(f"""
     ● Products: {', '.join([expense[0] for expense in expenses])}
