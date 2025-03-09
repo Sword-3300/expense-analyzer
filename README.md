@@ -15,4 +15,4 @@ This script is designed to help users analyze their expenses over a specific per
 # How to install
 1. Clone repository: `git clone https://github.com/Sword-3300/expense-analyzer.git`
 2. Install dependencies: `pip install -r requirements.txt`
-3. Open file: `python main.py` (make sure you are in the right path)
+3. Run script: `python main.py` (make sure you are in the right path)
