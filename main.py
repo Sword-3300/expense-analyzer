@@ -1,11 +1,14 @@
 from colorama import Fore, Style
 import datetime
 import statistics
+import os
 
 expenses = []
 grouped_expenses = {}
 names = []
 overall_prices = []
+
+os.system('cls')
 
 print("Write an expense in the format" + Fore.CYAN + " name:price:category" + Fore.RESET, end='. ')
 print("If you want to stop writing expenses, type '" + Fore.CYAN + "stop" + Fore.RESET + "'.")
@@ -74,4 +77,4 @@ for category in grouped_expenses:
 
 
 raw_time = datetime.datetime.now()
-print(Style.DIM + Fore.CYAN + "\nReport generated at " + raw_time.strftime("%d.%m.%Y %H:%M:%S") + Style.RESET_ALL)
+print(Style.DIM + Fore.CYAN + "\nReport generated on " + raw_time.strftime("%d.%m.%Y %H:%M:%S") + Style.RESET_ALL)
