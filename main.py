@@ -77,4 +77,4 @@ for category in grouped_expenses:
 
 
 raw_time = datetime.datetime.now()
-print(Style.DIM + Fore.CYAN + "\nReport generated on " + raw_time.strftime("%d.%m.%Y %H:%M:%S") + Style.RESET_ALL)
+print(Style.DIM + Fore.CYAN + "\nReport generated at " + raw_time.strftime("%d.%m.%Y %H:%M:%S") + Style.RESET_ALL)
