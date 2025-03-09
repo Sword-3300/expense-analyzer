@@ -12,6 +12,9 @@ This script is designed to help users analyze their expenses over a specific per
    - Overall prices by categories
    - Average of prices in each category
   
+# Example
+![alt text](https://github.com/Sword-3300/expense-analyzer/blob/main/example.png)
+  
 # How to install
 1. Clone repository: `git clone https://github.com/Sword-3300/expense-analyzer.git`
 2. Install dependencies: `pip install -r requirements.txt`
