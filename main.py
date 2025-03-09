@@ -37,9 +37,9 @@ for expense in expenses:
 
 print(Style.BRIGHT + Fore.MAGENTA + f"\nOVERALL EXPENSES" + Style.RESET_ALL, end="")
 print(f"""
-    ● Products: {', '.join([expense[0] for category in grouped_expenses for expense in grouped_expenses[category]])}
-    ● Overall price: {sum([float(expense[1]) for category in grouped_expenses for expense in grouped_expenses[category]])}
-    ● Average price: {statistics.mean([float(expense[1]) for category in grouped_expenses for expense in grouped_expenses[category]])}""" + Style.RESET_ALL)
+    ● Products: {', '.join([expense[0] for expense in expenses])}
+    ● Overall price: {sum([float(expense[1]) for expense in expenses])}
+    ● Average price: {statistics.mean([float(expense[1]) for expense in expenses])}""" + Style.RESET_ALL)
 
 # Expenses by categories
 print(Style.BRIGHT + Fore.MAGENTA + "\nEXPENSES BY CATEGORIES" + Style.RESET_ALL)
