@@ -1,68 +1,48 @@
 from colorama import Fore, Style
 import datetime
 import statistics
-import os
 
 expenses = []
 grouped_expenses = {}
-names = []
-overall_prices = []
-
-os.system('cls')
 
 print("Write an expense in the format" + Fore.CYAN + " name:price:category" + Fore.RESET, end='. ')
 print("If you want to stop writing expenses, type '" + Fore.CYAN + "stop" + Fore.RESET + "'.")
 
-
 # Main input
 while True:
     user_input = input("— ").lower()
-    splited_input = user_input.split(":")  # ['name', 'price', 'category']
+    splited_input = user_input.split(":")
 
     if user_input == "stop":
-        if not expenses:  # If expenses list is empty
-            print(Fore.RED + "You have not written any expense yet" + Fore.RESET)
-            continue
-        else:
-            break
-
-    if len(splited_input) == 3 and all(splited_input):
-        try:
-            splited_input[1] = float(splited_input[1])  # Convert price to number
+        if not expenses: print(Fore.RED + "You have not written any expense yet" + Fore.RESET) # If expenses list is empty
+        else: break
+    elif len(splited_input) == 3 and all(splited_input):
+        if splited_input[1].isnumeric() and float(splited_input[1]) > 0:
             print(Fore.GREEN + f"Expense submitted ({splited_input[0]})" + Fore.RESET)
             expenses.append(splited_input)
-        except ValueError:  # If price is not a number
-            print(Fore.RED + "Your price is not a number. Your expense will not be submitted" + Fore.RESET)
-    else:  # If the format is wrong
+        else:
+            print(Fore.RED + "Your price is not a valid number. Your expense will not be submitted" + Fore.RESET)
+    else:
         print(Fore.RED + "Invalid format. Your expense will not be submitted" + Fore.RESET)
+        continue
 
 # Group all expoenses by categories
 for expense in expenses:
-    name = expense[0];
-    price = expense[1];
-    category = expense[2];
+    name, price, category = expense
     if category not in grouped_expenses:
         grouped_expenses[category] = [(name, price)]  # Add new category and it's value
     else:
         grouped_expenses[category].append((name, price))  # Add new expense to existing category
 
-# Overall expenses
-for category in grouped_expenses:
-    for expense in grouped_expenses[category]:
-        names.append(expense[0])
-        overall_prices.append(float(expense[1]))
-
 
 print(Style.BRIGHT + Fore.MAGENTA + f"\nOVERALL EXPENSES" + Style.RESET_ALL, end="")
 print(f"""
-    ● Products: {', '.join(names)}
-    ● Overall price: {sum(overall_prices)}
-    ● Average price: {statistics.mean(overall_prices)}""" + Style.RESET_ALL)
-
-print(Style.BRIGHT + Fore.MAGENTA + "\nEXPENSES BY CATEGORIES" + Style.RESET_ALL)
-
+    ● Products: {', '.join([expense[0] for category in grouped_expenses for expense in grouped_expenses[category]])}
+    ● Overall price: {sum([float(expense[1]) for category in grouped_expenses for expense in grouped_expenses[category]])}
+    ● Average price: {statistics.mean([float(expense[1]) for category in grouped_expenses for expense in grouped_expenses[category]])}""" + Style.RESET_ALL)
 
 # Expenses by categories
+print(Style.BRIGHT + Fore.MAGENTA + "\nEXPENSES BY CATEGORIES" + Style.RESET_ALL)
 for category in grouped_expenses:
     names_in_category = []
     prices_in_category = []
@@ -76,5 +56,5 @@ for category in grouped_expenses:
     ● Average price: {statistics.mean(prices_in_category)}""")
 
 
-raw_time = datetime.datetime.now()
-print(Style.DIM + Fore.CYAN + "\nReport generated at " + raw_time.strftime("%d.%m.%Y %H:%M:%S") + Style.RESET_ALL)
+date_time = datetime.datetime.now()
+print(Style.DIM + Fore.CYAN + "\nReport generated at " + date_time.strftime("%d.%m.%Y %H:%M:%S") + Style.RESET_ALL)
